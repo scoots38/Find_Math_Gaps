@@ -2,47 +2,74 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Question Flow</title>
+  <title>Multi-Tree Question Flow</title>
 </head>
 <body>
-  <h1>Start the Question Flow</h1>
-  <button onclick="nextQuestion('q1')">Start</button>
+  <h1>Select a Question Tree</h1>
+  <div id="menu">
+    <button onclick="startTree('treeA')">Tree A</button>
+    <button onclick="startTree('treeB')">Tree B</button>
+  </div>
+
   <div id="questionBox" style="margin-top:20px;"></div>
 
   <script>
-    const flow = {
-      q1: {
-        question: "Do you like cats?",
-        answers: {
-          Yes: "q2a",
-          No: "q2b"
+    const trees = {
+      treeA: {
+        q1: {
+          question: "Is the sky blue?",
+          answers: {
+            Yes: "q2",
+            No: "end"
+          }
+        },
+        q2: {
+          question: "Do you like the color blue?",
+          answers: {
+            Yes: "end",
+            No: "end"
+          }
+        },
+        end: {
+          question: "Thanks for answering Tree A!",
+          answers: {}
         }
       },
-      q2a: {
-        question: "Do you own a cat?",
-        answers: {
-          Yes: "end",
-          No: "end"
+      treeB: {
+        q1: {
+          question: "Do you like pizza?",
+          answers: {
+            Yes: "q2",
+            No: "end"
+          }
+        },
+        q2: {
+          question: "With or without pineapple?",
+          answers: {
+            With: "end",
+            Without: "end"
+          }
+        },
+        end: {
+          question: "Thanks for answering Tree B!",
+          answers: {}
         }
-      },
-      q2b: {
-        question: "Do you like dogs?",
-        answers: {
-          Yes: "end",
-          No: "end"
-        }
-      },
-      end: {
-        question: "Thanks for answering!",
-        answers: {}
       }
     };
 
+    let currentTree = null;
+
+    function startTree(treeName) {
+      currentTree = trees[treeName];
+      document.getElementById('menu').style.display = 'none';
+      nextQuestion('q1');
+    }
+
     function nextQuestion(id) {
       const container = document.getElementById('questionBox');
-      const q = flow[id];
+      const q = currentTree[id];
       if (!q) return;
-      container.innerHTML = `<p>${q.question}</p>` + 
+      container.innerHTML = `<p>${q.question}</p>` +
         Object.entries(q.answers).map(
           ([label, nextId]) =>
             `<button onclick="nextQuestion('${nextId}')">${label}</button>`
