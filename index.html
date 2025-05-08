@@ -40,15 +40,22 @@
           }
         },
         none_correct_end: {
-          question: "We have a lot to work on to get you ready for geometry, but you can do it!"
+          question: "We have a lot to work on to get you ready for geometry, but you can do it!",
+          answers: {
+            Restart: "restart"
+          }
         },
         some_correct_end: {
           question: "Good job, but we have some gaps we need to fill!",
-          answers: {}
+          answers: {
+            Restart: "restart"
+          }
         },
         all_correct_end: {
           question: "Nice Work! You are going to do great in Geometry!",
-          answers: {}
+          answers: {
+            Restart: "restart"
+          }
         }
       },
       algebra: {
@@ -67,15 +74,22 @@
           }
         },
         none_correct_end: {
-          question: "We have a lot to work on to get you ready for geometry, but you can do it!"
+          question: "We have a lot to work on to get you ready for algebra, but you can do it!",
+          answers: {
+            Restart: "restart"
+          }
         },
         some_correct_end: {
           question: "Good job, but we have some gaps we need to fill!",
-          answers: {}
+          answers: {
+            Restart: "restart"
+          }
         },
         all_correct_end: {
-          question: "Nice Work! You are going to do great in Geometry!",
-          answers: {}
+          question: "Nice Work! You are going to do great in Algebra!",
+          answers: {
+            Restart: "restart"
+          }
         }
       }
     };
@@ -95,7 +109,7 @@
       container.innerHTML = `<p>${q.question}</p>` +
         Object.entries(q.answers).map(
           ([label, nextId]) =>
-            `<button onclick="nextQuestion('${nextId}')">${label}</button>`
+            `<button onclick="${nextId === 'restart' ? 'location.reload()' : `nextQuestion('${nextId}')`}">${label}</button>`
         ).join('');
     }
   </script>
