@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Question Flow</title>
+</head>
+<body>
+  <h1>Start the Question Flow</h1>
+  <button onclick="nextQuestion('q1')">Start</button>
+  <div id="questionBox" style="margin-top:20px;"></div>
+
+  <script>
+    const flow = {
+      q1: {
+        question: "Do you like cats?",
+        answers: {
+          Yes: "q2a",
+          No: "q2b"
+        }
+      },
+      q2a: {
+        question: "Do you own a cat?",
+        answers: {
+          Yes: "end",
+          No: "end"
+        }
+      },
+      q2b: {
+        question: "Do you like dogs?",
+        answers: {
+          Yes: "end",
+          No: "end"
+        }
+      },
+      end: {
+        question: "Thanks for answering!",
+        answers: {}
+      }
+    };
+
+    function nextQuestion(id) {
+      const container = document.getElementById('questionBox');
+      const q = flow[id];
+      if (!q) return;
+      container.innerHTML = `<p>${q.question}</p>` + 
+        Object.entries(q.answers).map(
+          ([label, nextId]) =>
+            `<button onclick="nextQuestion('${nextId}')">${label}</button>`
+        ).join('');
+    }
+  </script>
+</body>
+</html>
