@@ -5,53 +5,76 @@
   <title>Multi-Tree Question Flow</title>
 </head>
 <body>
-  <h1>Select a Question Tree</h1>
+  <h1>Select the math class you are in</h1>
   <div id="menu">
-    <button onclick="startTree('treeA')">Tree A</button>
-    <button onclick="startTree('treeB')">Tree B</button>
+    <button onclick="startTree('geometry')">Geometry</button>
+    <button onclick="startTree('algebra')">Algebra</button>
   </div>
 
   <div id="questionBox" style="margin-top:20px;"></div>
 
   <script>
     const trees = {
-      treeA: {
+      geometry: {
         q1: {
-          question: "Is the sky blue?",
+          question: "If the shorter sides of a right triangle are 3 inches and 4 inches, what is the length of the longest side?",
           answers: {
-            Yes: "q2",
-            No: "end"
+            "5": "q2",
+            "6": "q3"
           }
         },
         q2: {
-          question: "Do you like the color blue?",
+          question: "How many radians are in a semicircle?",
           answers: {
-            Yes: "end",
-            No: "end"
+            "3": "some_correct_end",
+            pi: "all_correct_end",
+            "2pi": "some_correct_end"
           }
         },
-        end: {
-          question: "Thanks for answering Tree A!",
+        q3: {
+          question: "How many degrees do all the angles of a triangle add up to?",
+          answers: {
+            "180": "some_correct_end",
+            "200": "none_correct_end",
+            "360": "none_correct_end"
+          }
+        },
+        none_correct_end: {
+          question: "We have a lot to work on to get you ready for geometry, but you can do it!"
+        },
+        some_correct_end: {
+          question: "Good job, but we have some gaps we need to fill!",
+          answers: {}
+        },
+        all_correct_end: {
+          question: "Nice Work! You are going to do great in Geometry!",
           answers: {}
         }
       },
-      treeB: {
+      algebra: {
         q1: {
-          question: "Do you like pizza?",
+          question: "What is x? 3 + x = 5",
           answers: {
-            Yes: "q2",
-            No: "end"
+            "2": "q2",
+            "1": "none_correct_end"
           }
         },
         q2: {
-          question: "With or without pineapple?",
+          question: "What is x? x^2 + 3 = 12",
           answers: {
-            With: "end",
-            Without: "end"
+            "3 or -3": "all_correct_end",
+            "2 or -2": "some_correct_end"
           }
         },
-        end: {
-          question: "Thanks for answering Tree B!",
+        none_correct_end: {
+          question: "We have a lot to work on to get you ready for geometry, but you can do it!"
+        },
+        some_correct_end: {
+          question: "Good job, but we have some gaps we need to fill!",
+          answers: {}
+        },
+        all_correct_end: {
+          question: "Nice Work! You are going to do great in Geometry!",
           answers: {}
         }
       }
